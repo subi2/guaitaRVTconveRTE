@@ -1,0 +1,336 @@
+<!--
+  Guaita Apps - Suite of standalone tools for architecture, BIM and documentation.
+  Copyright (c) 2026 Jordi Subirós
+  GNU Affero General Public License v3.0
+  See LICENSE file for details
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Help · Guaita RVT conveRTE · v1.2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0A0E0A; --panel:#12160F; --panel-2:#191E12; --panel-3:#232A18;
+  --line:#333D1F; --line-soft:#28301A; --txt:#EAF3D8; --dim:#94A377; --dim-2:#5E6B47;
+  --accent:#C6FF00; --accent-ink:#0A0E00; --accent-2:#FF2ECC; --accent-3:#00E5FF; --accent-4:#FFE500;
+  --danger:#FF4D6D; --radius:8px;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Space Grotesk',system-ui,sans-serif;
+  background:var(--ink); color:var(--txt); line-height:1.6;
+  background-image:linear-gradient(rgba(198,255,0,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(198,255,0,.03) 1px,transparent 1px);
+  background-size:44px 44px;
+}
+.mono{font-family:'IBM Plex Mono',monospace;}
+a{color:var(--accent-3); text-decoration:none;}
+a:hover{color:var(--accent);}
+
+/* ---------- Layout ---------- */
+.wrap{max-width:1180px; margin:0 auto; padding:0 24px; display:grid; grid-template-columns:230px 1fr; gap:48px;}
+@media(max-width:860px){ .wrap{grid-template-columns:1fr; gap:0;} nav.toc{display:none;} }
+
+/* ---------- Hero ---------- */
+header.hero{
+  border-bottom:1px solid var(--line); background:var(--panel);
+  padding:56px 24px 44px; position:relative; overflow:hidden;
+}
+header.hero .inner{max-width:1180px; margin:0 auto;}
+.brand{display:flex; align-items:center; gap:14px; margin-bottom:22px;}
+.brand .cells{display:grid; grid-template-columns:repeat(2,13px); gap:4px;}
+.brand .cells span{width:13px; height:13px;}
+.brand .cells span:nth-child(1){background:var(--accent);}
+.brand .cells span:nth-child(2){background:var(--accent-2);}
+.brand .cells span:nth-child(3){background:var(--accent-3);}
+.brand .cells span:nth-child(4){background:var(--accent-4);}
+.brand .bt{font-weight:700; font-size:20px; letter-spacing:.16em;}
+.brand .bt small{color:var(--accent); font-size:12px; letter-spacing:.1em; margin-left:2px;}
+header.hero h1{
+  font-size:clamp(34px,6vw,60px); line-height:1.02; font-weight:700; letter-spacing:-.02em;
+  max-width:16ch;
+}
+header.hero h1 em{font-style:normal; color:var(--accent);}
+header.hero p.lead{margin-top:18px; font-size:17px; color:var(--dim); max-width:60ch;}
+.hero-tag{
+  display:inline-block; margin-bottom:10px; font-family:'IBM Plex Mono',monospace;
+  font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent-ink);
+  background:var(--accent); padding:4px 10px; border-radius:20px;
+}
+
+/* ---------- TOC ---------- */
+nav.toc{position:sticky; top:32px; align-self:start; padding-top:48px;}
+nav.toc .toc-t{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--dim-2); margin-bottom:12px;}
+nav.toc ol{list-style:none; counter-reset:s;}
+nav.toc li{counter-increment:s; margin:2px 0;}
+nav.toc a{
+  display:flex; gap:10px; align-items:baseline; padding:6px 8px; border-radius:6px;
+  color:var(--dim); font-size:13.5px; border-left:2px solid transparent;
+}
+nav.toc a::before{content:counter(s,decimal-leading-zero); font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--dim-2);}
+nav.toc a:hover{background:var(--panel-2); color:var(--txt);}
+nav.toc a.active{color:var(--accent); border-left-color:var(--accent); background:var(--panel-2);}
+
+/* ---------- Content ---------- */
+main{padding:48px 0 100px; min-width:0;}
+section{margin-bottom:56px; scroll-margin-top:24px;}
+section > h2{
+  font-size:12px; font-family:'IBM Plex Mono',monospace; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--accent); margin-bottom:6px;
+}
+section > h2 .num{color:var(--dim-2); margin-right:10px;}
+section > .st{font-size:27px; font-weight:600; letter-spacing:-.01em; margin-bottom:18px; line-height:1.15;}
+section p{margin-bottom:14px; color:var(--txt);}
+section p.muted{color:var(--dim);}
+h3{font-size:17px; font-weight:600; margin:26px 0 10px;}
+
+/* ---------- Callouts ---------- */
+.note{
+  border:1px solid var(--line); border-left:3px solid var(--accent-3);
+  background:var(--panel); border-radius:0 var(--radius) var(--radius) 0;
+  padding:14px 16px; margin:18px 0; font-size:14px;
+}
+.note.warn{border-left-color:var(--accent-4);}
+.note.stop{border-left-color:var(--danger);}
+.note .nt{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); margin-bottom:5px;}
+.note.warn .nt{color:var(--accent-4);}
+.note.stop .nt{color:var(--danger);}
+
+/* ---------- Steps ---------- */
+ol.steps{list-style:none; counter-reset:step; margin:8px 0;}
+ol.steps li{counter-increment:step; position:relative; padding:12px 0 12px 46px; border-bottom:1px solid var(--line-soft);}
+ol.steps li:last-child{border-bottom:none;}
+ol.steps li::before{
+  content:counter(step); position:absolute; left:0; top:11px;
+  width:30px; height:30px; border-radius:8px; background:var(--panel-3); color:var(--accent);
+  font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:13px;
+  display:flex; align-items:center; justify-content:center; border:1px solid var(--line);
+}
+ol.steps li b{color:var(--accent);}
+
+/* ---------- Feature cards ---------- */
+.cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:14px; margin:10px 0;}
+.card{border:1px solid var(--line); background:var(--panel); border-radius:var(--radius); padding:16px;}
+.card .ci{width:34px; height:34px; border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:10px; background:var(--panel-3);}
+.card .ci svg{width:18px; height:18px; stroke:var(--accent); fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round;}
+.card h4{font-size:15px; font-weight:600; margin-bottom:4px;}
+.card p{font-size:13px; color:var(--dim); margin:0;}
+.card:nth-child(4n+2) .ci svg{stroke:var(--accent-2);}
+.card:nth-child(4n+3) .ci svg{stroke:var(--accent-3);}
+.card:nth-child(4n+4) .ci svg{stroke:var(--accent-4);}
+
+/* ---------- Tables ---------- */
+table.tbl{width:100%; border-collapse:collapse; font-size:14px; margin:14px 0;}
+table.tbl th{text-align:left; padding:9px 12px; background:var(--panel-2); color:var(--dim); font-weight:500; font-size:12px; letter-spacing:.03em; text-transform:uppercase; border-bottom:1px solid var(--line);}
+table.tbl td{padding:9px 12px; border-bottom:1px solid var(--line-soft); vertical-align:top;}
+table.tbl tr:hover td{background:var(--panel);}
+kbd{
+  font-family:'IBM Plex Mono',monospace; font-size:12px; background:var(--panel-3);
+  border:1px solid var(--line); border-bottom-width:2px; border-radius:5px; padding:2px 8px; color:var(--accent); white-space:nowrap;
+}
+code{font-family:'IBM Plex Mono',monospace; font-size:.88em; background:var(--panel-2); border:1px solid var(--line-soft); padding:1px 6px; border-radius:4px; color:var(--accent-3);}
+
+/* ---------- Panel map ---------- */
+.map{border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; margin:16px 0; font-family:'IBM Plex Mono',monospace; font-size:11.5px;}
+.map .mrow{display:flex; border-bottom:1px solid var(--line-soft);}
+.map .mrow:last-child{border-bottom:none;}
+.map .mcell{padding:14px 12px; border-right:1px solid var(--line-soft); color:var(--dim);}
+.map .mcell:last-child{border-right:none;}
+.map .mcell b{display:block; color:var(--accent); font-family:'Space Grotesk',sans-serif; font-size:13px; margin-bottom:3px;}
+.map .l{flex:0 0 26%;} .map .c{flex:1;} .map .r{flex:0 0 24%;}
+.map .top,.map .bot{background:var(--panel-2); color:var(--accent-3); padding:10px 12px; text-align:center;}
+
+/* ---------- Details / FAQ ---------- */
+details{border:1px solid var(--line); border-radius:var(--radius); background:var(--panel); margin:8px 0; overflow:hidden;}
+details summary{padding:14px 16px; cursor:pointer; font-weight:500; list-style:none; display:flex; align-items:center; gap:10px;}
+details summary::-webkit-details-marker{display:none;}
+details summary::before{content:'+'; font-family:'IBM Plex Mono',monospace; color:var(--accent); font-size:16px;}
+details[open] summary::before{content:'−';}
+details .db{padding:0 16px 16px 42px; color:var(--dim); font-size:14px;}
+details[open] summary{color:var(--accent);}
+
+footer.foot{border-top:1px solid var(--line); padding:28px 24px; text-align:center; color:var(--dim-2); font-size:12.5px;}
+footer.foot .fb{display:inline-flex; gap:8px; align-items:center; margin-bottom:8px;}
+footer.foot .fb .cells{display:grid; grid-template-columns:repeat(2,6px); gap:2px;}
+footer.foot .fb .cells span{width:6px; height:6px;}
+footer.foot .fb .cells span:nth-child(1){background:var(--accent);} footer.foot .fb .cells span:nth-child(2){background:var(--accent-2);}
+footer.foot .fb .cells span:nth-child(3){background:var(--accent-3);} footer.foot .fb .cells span:nth-child(4){background:var(--accent-4);}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="inner">
+    <div class="brand">
+      <span class="cells"><span></span><span></span><span></span><span></span></span>
+      <span class="bt">GUAITA<small>RVT</small></span>
+    </div>
+    <span class="hero-tag">User guide</span>
+    <h1>Turn an RVT project into an RTE <em>template</em> (and back).</h1>
+    <p class="lead">Guaita RVT conveRTE flips the internal type of a file —from project <code>.rvt</code> to template <code>.rte</code> or the other way round— by modifying a single marker inside the document, entirely within your browser and without sending the file anywhere.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav class="toc">
+    <div class="toc-t">Contents</div>
+    <ol>
+      <li><a href="#intro">What it is</a></li>
+      <li><a href="#formats">RVT and RTE</a></li>
+      <li><a href="#comencar">Getting started</a></li>
+      <li><a href="#interficie">The interface</a></li>
+      <li><a href="#deteccio">Detection</a></li>
+      <li><a href="#convertir">Convert and save</a></li>
+      <li><a href="#limits">Limits and guarantees</a></li>
+      <li><a href="#problemes">Troubleshooting</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <section id="intro">
+      <h2><span class="num">01</span>Introduction</h2>
+      <div class="st">An RVT/RTE file type converter in a single page</div>
+      <p>The same model can be saved as a <b>project</b> (<code>.rvt</code> extension) or as a <b>template</b> (<code>.rte</code> extension). Renaming the file extension is not enough: the document holds an internal marker that determines its type, and that is what the application reads when opening it.</p>
+      <p>Guaita RVT conveRTE locates this marker and flips it. It is a single HTML file that opens in any modern browser; nothing to install.</p>
+      <p class="muted">All processing happens inside your browser. The file is never sent to any server, so you can work with confidential models and offline.</p>
+      <div class="cards">
+        <div class="card"><div class="ci"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg></div><h4>No server</h4><p>The file never leaves your computer; it is processed locally.</p></div>
+        <div class="card"><div class="ci"><svg viewBox="0 0 24 24"><path d="M17 3l4 4L7 21H3v-4z"/></svg></div><h4>Minimal change</h4><p>Only the type marker is touched — four bytes.</p></div>
+        <div class="card"><div class="ci"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M12 3a9 9 0 100 18 9 9 0 000-18z"/></svg></div><h4>Verified</h4><p>The file is re-read after the change to confirm it.</p></div>
+        <div class="card"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg></div><h4>Bidirectional</h4><p>Project to template and template to project.</p></div>
+      </div>
+    </section>
+
+    <section id="formats">
+      <h2><span class="num">02</span>Project and template</h2>
+      <div class="st">What separates a .rvt from a .rte</div>
+      <p>Both share the same internal file format (an OLE2/CFBF container). The type difference lives in the <b>Last Save Path</b> stored inside the document's <code>BasicFileInfo</code> section: it contains the file extension (<code>.rvt</code> or <code>.rte</code>) and that text is what marks the nature of the document.</p>
+      <table class="tbl">
+        <thead><tr><th>Type</th><th>Extension</th><th>Use</th></tr></thead>
+        <tbody>
+          <tr><td><b>Project</b></td><td><code>.rvt</code></td><td>The usual working model, with its content and history.</td></tr>
+          <tr><td><b>Template</b></td><td><code>.rte</code></td><td>Starting point for new projects: predefined styles, families and settings.</td></tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <div class="nt">Why renaming is not enough</div>
+        If you only change the extension of the file name in the file explorer, the application still sees the original internal type and may reject it or open it as the wrong type. This tool changes the marker inside.
+      </div>
+    </section>
+
+    <section id="comencar">
+      <h2><span class="num">03</span>Getting started</h2>
+      <div class="st">Two ways to load the file</div>
+      <ol class="steps">
+        <li><b>Drag and drop</b> the <code>.rvt</code> or <code>.rte</code> file onto the central upload area.</li>
+        <li>Or <b>click the upload area</b> ("Drag the file here, or click to select it") to open the system file picker.</li>
+      </ol>
+      <p>Once loaded, the tool reads it instantly and shows the card with the detected type and the proposed conversion.</p>
+      <div class="note">
+        <div class="nt">Accepted extensions</div>
+        The picker filters for <code>.rvt</code> and <code>.rte</code>. Make sure the file really is an RVT or RTE document; if it is not, the tool will warn you.
+      </div>
+    </section>
+
+    <section id="interficie">
+      <h2><span class="num">04</span>The interface</h2>
+      <div class="st">Where everything is</div>
+      <p>The window is a single vertical card. The map below shows its layout from top to bottom:</p>
+      <div class="map">
+        <div class="top">Header · "Guaita RVT conveRTE" with the description</div>
+        <div class="mrow">
+          <div class="mcell c"><b>Upload area</b>Area to drag onto or click. Shows the .rvt and .rte extensions and reminds you everything is processed locally.</div>
+        </div>
+        <div class="mrow">
+          <div class="mcell l"><b>Source</b>The loaded file with its badge (PROJECT · RVT or TEMPLATE · RTE).</div>
+          <div class="mcell c"><b>Arrow and target</b>The proposed conversion, with a field to edit the output name and the resulting extension fixed.</div>
+          <div class="mcell r"><b>Notice</b>Yellow note: experimental tool, always verify the result.</div>
+        </div>
+        <div class="bot">Convert button · status message once the file is downloaded</div>
+      </div>
+    </section>
+
+    <section id="deteccio">
+      <h2><span class="num">05</span>How it detects the type</h2>
+      <div class="st">Read before touching anything</div>
+      <p>When the file is loaded, the tool opens the internal structure of the document and looks for the extension (<code>.rvt</code> or <code>.rte</code>) inside the Last Save Path of <code>BasicFileInfo</code>. From what it finds, it deduces the type:</p>
+      <ul style="margin:0 0 14px 20px; color:var(--txt);">
+        <li>If <code>.rvt</code> appears, the file is a <b>project</b>.</li>
+        <li>If <code>.rte</code> appears, the file is a <b>template</b>.</li>
+      </ul>
+      <p>The card shows the file <b>size</b> and, in technical mode, the exact <b>offsets</b> where the marker was found. The card automatically proposes the conversion to the opposite type.</p>
+      <div class="note warn">
+        <div class="nt">When it cannot be determined</div>
+        If the file contains no recognisable extension, or contradictory ones, the tool cannot decide the type and tells you so with an error message, without modifying anything.
+      </div>
+    </section>
+
+    <section id="convertir">
+      <h2><span class="num">06</span>Convert and save</h2>
+      <div class="st">One click, one new file downloaded</div>
+      <ol class="steps">
+        <li><b>Review the output name.</b> In the editable field on the target side you can change the base name; the resulting extension (<code>.rvt</code> or <code>.rte</code>) is fixed by the conversion.</li>
+        <li><b>Press the convert button.</b> The button text states the exact action, for example "Convert to template (.rte) → name.rte".</li>
+        <li>The tool makes the change, <b>re-reads the file to verify</b> the marker was updated, and <b>downloads</b> the result automatically in the browser.</li>
+      </ol>
+      <p>When it finishes, a green confirmation message appears with the name of the downloaded file and a note that the type was verified after the change.</p>
+      <div class="note">
+        <div class="nt">What exactly changes</div>
+        Only the extension text inside <code>BasicFileInfo</code> is replaced (four bytes), with the same length. The save history, counters and the rest of the model content are untouched and remain identical bit for bit.
+      </div>
+    </section>
+
+    <section id="limits">
+      <h2><span class="num">07</span>Limits and guarantees</h2>
+      <div class="st">Use it wisely</div>
+      <p>The source file is not modified: you always get a <b>new downloaded file</b>, so you keep the original just in case. Even so, you are working with real data: keep a backup and always check the result.</p>
+      <div class="note stop">
+        <div class="nt">Experimental tool</div>
+        The application was conceived for educational purposes. Even though the change is minimal and verified, <b>you must open the resulting file in the authoring application</b> to confirm it behaves as expected before using it in production.
+      </div>
+    </section>
+
+    <section id="problemes">
+      <h2><span class="num">08</span>Troubleshooting</h2>
+      <div class="st">If something goes wrong</div>
+      <details>
+        <summary>"Not a valid OLE2/CFBF file"</summary>
+        <div class="db">The loaded file does not have the internal structure of an RVT/RTE document. Check that it really is a <code>.rvt</code> or <code>.rte</code> and that it is not damaged or compressed.</div>
+      </details>
+      <details>
+        <summary>"The type could not be determined"</summary>
+        <div class="db">The Last Save Path inside <code>BasicFileInfo</code> contains no recognisable extension, or contradictory ones. The tool cannot decide the type and touches nothing. Try saving the file again from the source application and retry.</div>
+      </details>
+      <details>
+        <summary>The browser does not download the file</summary>
+        <div class="db">Some browsers block automatic downloads. Check the downloads bar and the site permissions. If you opened the HTML from a very restricted environment, try a standard desktop browser.</div>
+      </details>
+      <details>
+        <summary>The application does not open the converted file</summary>
+        <div class="db">Remember this is an experimental tool. Double-check the conversion made sense (a real project to a template, or the reverse) and, if needed, start again from the original. Always verify the result.</div>
+      </details>
+    </section>
+  </main>
+</div>
+
+<footer class="foot">
+  <div class="fb"><span class="cells"><span></span><span></span><span></span><span></span></span> <b style="color:var(--txt); font-weight:600; letter-spacing:.1em;">GUAITA RVT conveRTE</b></div>
+  <div>RVT/RTE file type converter · SBS BIM Consulting</div>
+</footer>
+
+<script>
+// Highlight the active section in the table of contents
+const links=[...document.querySelectorAll('nav.toc a')];
+const map=new Map(links.map(a=>[a.getAttribute('href').slice(1),a]));
+const obs=new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){ links.forEach(l=>l.classList.remove('active')); const a=map.get(e.target.id); if(a)a.classList.add('active'); } });
+},{rootMargin:'-20% 0px -70% 0px'});
+document.querySelectorAll('main section').forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
