@@ -13,6 +13,8 @@
 
 Guaita RVT conveRTE inverteix el tipus intern d'un fitxer —de projecte `.rvt` a plantilla `.rte` o al revés— modificant un únic marcador dins del document, tot dins del teu navegador i sense enviar el fitxer enlloc.
 
+**Fitxers:** [Aplicació (CAT)](pagesCAT/guaitaRVTconveRTE_12.html) · [Ajuda (CAT)](pagesCAT/120_HLP_Guaita_RVT_conveRTE-ajuda_12.html) · [App (ENG)](pagesENG/guaitaRVTconveRTE_12-ENG.html) · [Help (ENG)](pagesENG/120_HLP_Guaita_RVT_conveRTE-ajuda_12-ENG.html) · [Landing](index.html) · [English README](README.md)
+
 ## Contingut
 
 1. [Què és](#01--introducció)

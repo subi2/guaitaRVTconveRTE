@@ -13,6 +13,8 @@
 
 Guaita RVT conveRTE flips the internal type of a file —from project `.rvt` to template `.rte` or the other way round— by modifying a single marker inside the document, entirely within your browser and without sending the file anywhere.
 
+**Files:** [App (ENG)](pagesENG/guaitaRVTconveRTE_12-ENG.html) · [Help (ENG)](pagesENG/120_HLP_Guaita_RVT_conveRTE-ajuda_12-ENG.html) · [Aplicació (CAT)](pagesCAT/guaitaRVTconveRTE_12.html) · [Ajuda (CAT)](pagesCAT/120_HLP_Guaita_RVT_conveRTE-ajuda_12.html) · [Landing](index.html) · [Versió catalana](README-CAT.md)
+
 ## Contents
 
 1. [What it is](#01--introduction)
